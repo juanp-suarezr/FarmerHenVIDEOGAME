@@ -158,7 +158,7 @@ MonoBehaviour:
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
   m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
+  m_InputActionsPerSecond: 0.5
   m_RepeatDelay: 0.5
   m_ForceModuleActive: 0
 --- !u!114 &122120562
@@ -189,7 +189,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &381438708
 GameObject:
@@ -325,6 +325,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 381438708}
   m_CullTransparentMesh: 1
+--- !u!1 &663277901
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 663277903}
+  - component: {fileID: 663277902}
+  m_Layer: 0
+  m_Name: MobileControler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &663277902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 663277901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 845668fa5e3b94a43bed10db84bf6873, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuManager: {fileID: 0}
+  GameManager: {fileID: 785385340}
+--- !u!4 &663277903
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 663277901}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.4668436, y: -0.21491699, z: 151.95934}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &752738643
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,6 +404,13 @@ MonoBehaviour:
   pauseMenu: {fileID: 0}
   pauseBtn: {fileID: 0}
   continueBtn: {fileID: 0}
+  portada: {fileID: 0}
+  GameManager: {fileID: 785385340}
+  dialogueManager: {fileID: 1430816487}
+  MobileControler: {fileID: 663277902}
+  num: 0
+  botonesM: {fileID: 0}
+  personaje: {fileID: 0}
 --- !u!4 &752738645
 Transform:
   m_ObjectHideFlags: 0
@@ -371,6 +424,61 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 965927765}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &785385339
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 785385341}
+  - component: {fileID: 785385340}
+  m_Layer: 0
+  m_Name: GameManger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &785385340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785385339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f47c7d89934085b4088d5ddccf460af9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 0}
+  gallinas: {fileID: 3019526596380584164, guid: 81b1bff319a8ea24482c857fe607cd76, type: 3}
+  portada: {fileID: 0}
+  corral: {fileID: 0}
+  GameWin: {fileID: 0}
+  GameOver: {fileID: 0}
+  timerScript: {fileID: 0}
+  createTime: 0
+  createRange: 2
+  tutorialcount: 0
+  ismobile: 1
+--- !u!4 &785385341
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785385339}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &965927761
@@ -470,7 +578,7 @@ RectTransform:
   - {fileID: 381438709}
   - {fileID: 1732946936}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -695,7 +803,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1430816487
 MonoBehaviour:
@@ -714,7 +822,7 @@ MonoBehaviour:
   dialogueLines:
   - 'Hola granjero, tenemos un problema con las gallinas -_-
 
-    (enter para continuar)'
+    (play para continuar)'
   - 'Se han escapado del corral y no hemos podido encontrarlas =(
 
 '
@@ -722,7 +830,8 @@ MonoBehaviour:
   cronometro: 6
   corral: {fileID: 0}
   gallina: {fileID: 0}
-  gameManager: {fileID: 0}
+  gameManager: {fileID: 785385340}
+  personaje: {fileID: 0}
 --- !u!1 &1613073716
 GameObject:
   m_ObjectHideFlags: 0
@@ -942,10 +1051,10 @@ RectTransform:
   m_Father: {fileID: 965927765}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 34}
-  m_SizeDelta: {x: -1820, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -0.2177124, y: 5.2509766}
+  m_SizeDelta: {x: -1822, y: -987.56}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1910824817
 MonoBehaviour:

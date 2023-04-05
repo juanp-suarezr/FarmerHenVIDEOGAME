@@ -9,7 +9,7 @@ public class personaje : MonoBehaviour
     Vector2 input;
     
     //touch
-    Vector2 Touchmove = Vector2.zero;
+    Vector2 Touchmove;
     public Transform playerTransform;
 
     public float touchSpeed;
@@ -19,9 +19,10 @@ public class personaje : MonoBehaviour
     public float dirX;
     public float dirY;
 
-    public float minimoX, minimoY;
-    public float maximoX, maximoY;
+    public float dirXM;
+    public float dirYM;
 
+    
     public GameObject gallina;
 
     public corral corral;
@@ -33,7 +34,15 @@ public class personaje : MonoBehaviour
     public Animator animator;
     // Start is called before the first frame update
     
-    
+    //mobile ajust
+    public menuManager menuManager;
+
+    public GameManager GameManager;
+
+    public int num;
+
+    public CharacterController controller;
+
 
     
 
@@ -54,37 +63,56 @@ public class personaje : MonoBehaviour
     void Update()
     {
         //acepta input usuario verti y horiz
-        
-
-        if (Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
-            float screenHalf = Screen.width / 2;
-            float screenHalfY = Screen.height / 2;
-            Debug.Log(touch.position.x);
-            if (touch.position.x > playerTransform.position.x ) {
-                Debug.Log("entro");
-                Spr.flipX = false;
-                Touchmove = Vector2.right;
-            } else if (touch.position.x < 0) {
-                Spr.flipX = true;
-                Touchmove = Vector2.left;
-            } else if (touch.position.y < 0) {
+                    
                 
-                Touchmove = Vector2.down;
-            } else if (touch.position.y > 0) {
                 
-                Touchmove = Vector2.up;
-            }
 
+                switch (num)
+                {
+                    
+                    case 1: 
+                        dirX = 0;
+                        dirY += 0.03f;
+                        input.x = dirX;
+                        input.y = dirY;
+                        
+                    break;
+                    case 2: 
+                        dirX = 0;
+                        dirY -= 0.03f;
+                        input.x = dirX;
+                        input.y = dirY;
+                        
+                    break;
+                    case 3: 
+                        Spr.flipX = false;
+                        dirX -= 0.03f;
+                        dirY = 0;
+                        input.x = dirX;
+                        input.y = dirY;
+                        
+                    break;
+                    case 4: 
+                        Spr.flipX = true;
+                        dirX += 0.03f;
+                        dirY = 0;
+                        input.x = dirX;
+                        input.y = dirY;
+                        
+                    break;
+
+                    default:
+                    dirX = Input.GetAxis("Horizontal");
+                    dirY = Input.GetAxis("Vertical");
+                    input.x = dirX;
+                    input.y = dirY;
+                    
+                break;
+                }
             
-        } else 
-        {
-            dirX = Input.GetAxis("Horizontal");
-            dirY = Input.GetAxis("Vertical");
-            input.x = dirX;
-            input.y = dirY;
-        }
+            
+            
+        
 
         if (dirX != 0 || dirY != 0) {
 
@@ -140,13 +168,15 @@ public class personaje : MonoBehaviour
 
     private void FixedUpdate() {
         
-        if (Input.touchCount > 0)
-        {
-            rb.velocity = Touchmove * touchSpeed * Time.fixedDeltaTime;
-        } else 
-        {
+       
+            
+       
             rb.velocity = input * speed * Time.fixedDeltaTime;
-        }
+        
+            
+
+            
+        
         
 
         
@@ -163,6 +193,75 @@ public class personaje : MonoBehaviour
             
         }
         
+    }
+
+
+    //botones mobile
+
+    public void animationWithHen() 
+    {
+        if (dirXM != 0 || dirYM != 0) {
+
+            if (corral.contador > 0)
+            {
+                
+                animator.SetBool("withHen", true);
+                animator.SetBool("moving", false);
+                animator.SetBool("withHenStop", false);
+                
+            } else {
+                animator.SetBool("withHen", false);
+                animator.SetBool("moving", true);
+            }
+
+            
+        } else {
+
+            if (corral.contador > 0)
+            {
+                
+                animator.SetBool("withHenStop", true);
+                animator.SetBool("withHen", false);
+                
+            } else {
+                animator.SetBool("moving", false);
+            }
+
+            
+        }
+    }
+    public void Up() {
+        
+        animationWithHen();
+        num = 1;
+        
+        
+        
+    }
+
+    public void Down() {
+        
+        animationWithHen();
+        num = 2;
+        
+    }
+
+    public void Left() {
+        
+        animationWithHen();
+        num = 3;
+        
+    }
+
+    public void Right() {
+        
+        animationWithHen();
+        num = 4;
+        
+    }
+
+    public void stop() {
+        num = 0;
     }
     
 }

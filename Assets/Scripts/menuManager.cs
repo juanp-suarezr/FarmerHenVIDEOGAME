@@ -17,24 +17,63 @@ public class menuManager : MonoBehaviour
     public GameObject continueBtn;
 
     public GameObject portada;
+
+    //mobile ajust
+
+    
+    public GameManager GameManager;
+
+    public dialogueManager dialogueManager;
+
+    public MobileControler MobileControler;
+
+    public int num = 0;
+
+    public GameObject botonesM;
+
+    public personaje personaje;
+
     
     //scene home
     public void PlayGame() 
     {
         Time.timeScale = 1f;
+        
+
         if (SceneManager.GetActiveScene().name == "Home")
         {
             SceneManager.LoadScene(1);
+            
         } else if (SceneManager.GetActiveScene().name == "Home 1")
         {
-            SceneManager.LoadScene(2);
+            if (dialogueManager.cronometro <= 0)
+                {
+
+                    
+                    dialogueManager.NextDialogueLine();
+                    num += 1;
+                    if (num == 3)
+                    {
+                        SceneManager.LoadScene(2);
+                    }
+                    
+                } else {
+                    dialogueManager.cronometro -= Time.deltaTime;
+                }
+
+            
+            
+            
+
         }
         
     }
 
+    
+
     public void ExitGame() 
     {
-                
+        
         Application.Quit();
     }
 
@@ -44,11 +83,16 @@ public class menuManager : MonoBehaviour
         if (isPaused) {
             isMenuPause = false;
             pauseMenu.SetActive(false);
+            
             UpdateGameState();
 
         } else {
             isMenuPause = true;
+            GameManager.GameWin.SetActive(false);
+            GameManager.GameOver.SetActive(false);
             pauseMenu.SetActive(true);
+            
+            portada.SetActive(false);
             UpdateGameState();
         }
         
@@ -57,16 +101,23 @@ public class menuManager : MonoBehaviour
 
     public void ContinueMenuBtn()
     {
+        if (dialogueManager.Dialogueistrue)
+        {
+                isMenuPause = false;
+                pauseMenu.SetActive(false);
+                portada.SetActive(false);
+                UpdateGameState();
+        }
+
         if (isPaused) {
-            continueBtn.SetActive(true);
-            Debug.Log("continuoWorks");
+            
             isMenuPause = false;
             pauseMenu.SetActive(false);
             portada.SetActive(false);
             UpdateGameState();
 
         } else {
-            Debug.Log("continuoWorksOutIf");
+            UpdateGameState();
         }
         
 
@@ -81,7 +132,7 @@ public class menuManager : MonoBehaviour
 
     public void ExitBtnLevel() 
     {
-                
+        
         SceneManager.LoadScene(0);
     }
 
@@ -99,6 +150,8 @@ public class menuManager : MonoBehaviour
             
             UpdateGameState();
         }
+
+        
     }
 
     private void UpdateGameState() 
@@ -116,6 +169,8 @@ public class menuManager : MonoBehaviour
             
         }
     }
+
+    
 
 
 }

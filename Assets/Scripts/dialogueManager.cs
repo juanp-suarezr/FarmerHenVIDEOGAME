@@ -12,7 +12,7 @@ public class dialogueManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField, TextArea(4,6)] private string[] dialogueLines;
     private float typingTime = 0.05f;
-    private bool Dialogueistrue;
+    public bool Dialogueistrue;
     private int lineIndex;
     
     public float cronometro = 5;
@@ -22,6 +22,8 @@ public class dialogueManager : MonoBehaviour
     public GameObject gallina;
 
     public GameManager gameManager; 
+
+    public personaje personaje;
         
 
     private void StartDialogue()
@@ -32,9 +34,9 @@ public class dialogueManager : MonoBehaviour
         StartCoroutine(ShowLine());
     }
 
-    private void NextDialogueLine() {
+    public void NextDialogueLine() {
         lineIndex++;
-        cronometro = 8;
+        cronometro = 6;
         Debug.Log(lineIndex);
         if (lineIndex < dialogueLines.Length)
         {
@@ -63,24 +65,35 @@ public class dialogueManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Home 1")
         {
-            if (Input.GetKeyDown(KeyCode.Return)) 
-        {
-            NextDialogueLine();
-        }
+            if (cronometro <= 0)
+                {
+
+                    
+                    if (Input.GetKeyDown(KeyCode.Return)) 
+                    {
+            
+                        NextDialogueLine();
+                    }
+                    
+                } else {
+                    cronometro -= Time.deltaTime;
+                }
+            
         } else if (SceneManager.GetActiveScene().name == "tutorial")
         {
             if (gameManager.tutorialcount == 0)
             {
                 if (cronometro <= 0)
                 {
+
                     
-                    if (Input.GetKeyDown(KeyCode.LeftArrow))
+                    if (Input.GetKeyDown(KeyCode.LeftArrow) || personaje.num == 3)
                     {
                         NextDialogueLine();
                         gameManager.tutorialcount += 1;
                     }
 
-                    if (Input.GetKeyDown(KeyCode.RightArrow))
+                    if (Input.GetKeyDown(KeyCode.RightArrow) || personaje.num == 4)
                     {
                         NextDialogueLine();
                         gameManager.tutorialcount += 1;
@@ -98,13 +111,13 @@ public class dialogueManager : MonoBehaviour
                 {
                     
                     
-                    if (Input.GetKeyDown(KeyCode.UpArrow))
+                    if (Input.GetKeyDown(KeyCode.UpArrow) || personaje.num == 1)
                     {
                         NextDialogueLine();
                         gameManager.tutorialcount += 1;
                     }
 
-                    if (Input.GetKeyDown(KeyCode.DownArrow))
+                    if (Input.GetKeyDown(KeyCode.DownArrow) || personaje.num == 2)
                     {
                         NextDialogueLine();
                         gameManager.tutorialcount += 1;
@@ -138,8 +151,9 @@ public class dialogueManager : MonoBehaviour
                 
                 if (cronometro <= 0)
                 {
-                    if (Input.GetKeyDown(KeyCode.Return)) 
+                    if (Input.GetKeyDown(KeyCode.Return) || Input.touchCount > 0) 
                     {
+                        Dialogueistrue = false;
                         SceneManager.LoadScene(3);
                     }
                     

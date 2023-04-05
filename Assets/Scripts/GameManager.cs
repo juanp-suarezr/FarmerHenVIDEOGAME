@@ -34,7 +34,8 @@ public class GameManager : MonoBehaviour
 
     private int num_escena;
 
-    
+    //mobile ajust
+    public bool ismobile = true;
 
     void Start()
     {
@@ -112,6 +113,14 @@ public class GameManager : MonoBehaviour
             } else {
                 GameWin.SetActive(false);
             }
+        
+        if (Input.touchCount > 0) 
+        {
+            ismobile = true;
+        } else
+        {
+            ismobile = false;
+        }
     }
 
     public void Creando() 
